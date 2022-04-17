@@ -25,12 +25,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+				sh "java -version"                
+				sh "mvn -Dmaven.test.failure.ignore=true clean package"
+				sh "java -version"
             }
         }
 		stage('Unit Test') {
             steps {
-                junit '**/target/surefire-reports/TEST-*.xml'
+				sh "java -version"                
+				junit '**/target/surefire-reports/TEST-*.xml'
                 archiveArtifacts 'target/*.jar'
 //                hygieiaBuildPublishStep buildStatus: 'Success'
 //				hygieiaArtifactPublishStep artifactDirectory: './//target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: ''
@@ -39,12 +42,14 @@ pipeline {
 				hygieiaDeployPublishStep applicationName: 'develop-pipeline', artifactDirectory: 'target', artifactGroup: 'com.example', artifactName: '*.war', artifactVersion: '', buildStatus: 'Success', environmentName: 'QA'
 				hygieiaDeployPublishStep applicationName: 'develop-pipeline', artifactDirectory: 'target', artifactGroup: 'com.example', artifactName: '*.war', artifactVersion: '', buildStatus: 'Success', environmentName: 'PROD'    
 				hygieiaCodeQualityPublishStep checkstyleFilePattern: '**/*/checkstyle-result.xml', findbugsFilePattern: '**/*/Findbugs.xml', jacocoFilePattern: '**/*/jacoco.xml', junitFilePattern: '**/*/TEST-.*-test.xml', pmdFilePattern: '**/*/PMD.xml'
- 
+ 				sh "java -version"
             }
         }
 		stage('Integration Test') {
             steps {
-                sh "mvn -Dmaven.test.failure.ignore=true clean verify"
+                sh "java -version"
+				sh "mvn -Dmaven.test.failure.ignore=true clean verify"
+				sh "java -version"				
             }
         }
 //		stage('SonarQube Analysis') {
@@ -57,6 +62,7 @@ pipeline {
 //	}
 		stage('Sonar') {
 			steps {
+				sh "java -version"
 				sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
 				sh "export PATH=$JAVA_HOME/bin:$PATH"
 				sh "export JAVA_HOME"
