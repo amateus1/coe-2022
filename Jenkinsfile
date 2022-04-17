@@ -11,7 +11,7 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
-	stage('Unit Test') {
+		stage('Unit Test') {
             steps {
                 junit '**/target/surefire-reports/TEST-*.xml'
                 archiveArtifacts 'target/*.jar'
@@ -25,5 +25,18 @@ pipeline {
  
             }
         }
+		stage('Integration Test') {
+            steps {
+                sh "mvn -Dmaven.test.failure.ignore=true clean verify"
+            }
+        }
+		stage('SonarQube Analysis') {
+			def mvn = tool 'Default Maven';
+			withSonarQubeEnv() {
+				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
+      }
+    }
+
+		
     }
 }
