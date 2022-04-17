@@ -1,6 +1,18 @@
 pipeline {
     agent any
+	tools {
+        jdk 'jdk_11.0.14'
+    }
 	stages {
+		stage('jdk 11') {
+			steps {
+			withEnv(["JAVA_HOME=${tool 'JDK-11'}", "PATH=${tool 'JDK-11'}/bin:${env.PATH}"]) {
+			sh 'java -version'
+			sh 'javac -version'
+        }
+      }
+    }
+
         stage('Preparation') {
             steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
@@ -21,9 +33,7 @@ pipeline {
 					// substitution is done by shell script using environment
 					//sh '$JAVA_HOME/bin/java -version'
 				//}
-				tools {
-                   jdk "jdk-11.0.14"
-                }
+
 				sh "java -version"
             }
         }
