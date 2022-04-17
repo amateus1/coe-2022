@@ -4,6 +4,16 @@ pipeline {
         stage('Preparation') {
             steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+				jdk = tool name: 'JDK11'
+				env.JAVA_HOME = /usr/lib/jvm/java-11-openjdk-amd64
+				sh "java -version"
+				//echo "jdk installation path is: ${jdk}"
+				// next 2 are equivalents
+				//			  sh "${jdk}/bin/java -version"
+
+  // note that simple quote strings are not evaluated by Groovy
+  // substitution is done by shell script using environment
+  //sh '$JAVA_HOME/bin/java -version'
             }
         }
         stage('Build') {
