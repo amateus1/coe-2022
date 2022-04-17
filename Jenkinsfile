@@ -16,8 +16,8 @@ pipeline {
                 junit '**/target/surefire-reports/TEST-*.xml'
                 archiveArtifacts 'target/*.jar'
                 hygieiaBuildPublishStep buildStatus: 'Success'
-				//hygieiaArtifactPublishStep artifactDirectory: './target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: ''
-                //hygieiaDeployPublishStep applicationName: 'Devops3', artifactDirectory: './target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: '', buildStatus: 'Success', environmentName: 'Dev'
+		hygieiaArtifactPublishStep artifactDirectory: './target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: ''
+                hygieiaDeployPublishStep applicationName: 'Devops3', artifactDirectory: './target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: '', buildStatus: 'Success', environmentName: 'Dev'
             }
         }
     }
