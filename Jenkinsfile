@@ -45,8 +45,7 @@ pipeline {
 				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
 //      	} else {
 //         bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
-//      }
-   }
-
-}
+				}
+				}
+			}
 }
