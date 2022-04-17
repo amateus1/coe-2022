@@ -5,7 +5,13 @@ pipeline {
             steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
 				//environment {
-					sh '$JAVA_HOME = /usr/lib/jvm/java-1.11.0-openjdk-amd64'
+					sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+					sh "export PATH=$JAVA_HOME/bin:$PATH"
+					sh "export JAVA_HOME"
+					sh "export JRE_HOME"
+					sh "export PATH"
+
+//					sh '$JAVA_HOME = /usr/lib/jvm/java-1.11.0-openjdk-amd64'
 					//env.JAVA_HOME = "${jdk}"
 					sh "java -version"
 					//echo "jdk installation path is: ${jdk}"
