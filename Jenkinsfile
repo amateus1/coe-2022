@@ -21,6 +21,10 @@ pipeline {
 					// substitution is done by shell script using environment
 					//sh '$JAVA_HOME/bin/java -version'
 				//}
+				tools {
+                   jdk "jdk-11.0.14"
+                }
+				sh "java -version"
             }
         }
         stage('Build') {
