@@ -5,10 +5,10 @@ pipeline {
             steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
 				//environment {
-					sh '$JAVA_HOME/usr/lib/jvm/java-1.11.0-openjdk-amd64'
+					sh '$JAVA_HOME = /usr/lib/jvm/java-1.11.0-openjdk-amd64'
 					//env.JAVA_HOME = "${jdk}"
 					sh "java -version"
-					echo "jdk installation path is: ${jdk}"
+					//echo "jdk installation path is: ${jdk}"
 					// next 2 are equivalents
 					//sh "${jdk}/bin/java -version"
 					// note that simple quote strings are not evaluated by Groovy
