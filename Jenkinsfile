@@ -30,7 +30,6 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean verify"
             }
         }
-		}
 		stage('SonarQube Analysis') {
 			steps {
 			def mvn = tool 'Default Maven';
@@ -39,3 +38,4 @@ pipeline {
 			}
 		}
     }
+}
