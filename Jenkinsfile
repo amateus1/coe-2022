@@ -57,6 +57,11 @@ pipeline {
 //	}
 		stage('Sonar') {
 			steps {
+				sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+				sh "export PATH=$JAVA_HOME/bin:$PATH"
+				sh "export JAVA_HOME"
+				sh "export JRE_HOME"
+				sh "export PATH"
 				sh "java -version"
 				sh "mvn sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=ef026f77b563ee37ea01bb630b4dc2701ce4a306"
 				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
