@@ -5,7 +5,7 @@ pipeline {
             steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
 				tools {
-					jdk = "JAVA_HOME"
+					jdk "JAVA_HOME"
 					env.JAVA_HOME = "${jdk}"
 					sh "java -version"
 					echo "jdk installation path is: ${jdk}"
