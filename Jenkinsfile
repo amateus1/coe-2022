@@ -1,7 +1,7 @@
 pipeline {
     agent any
 	tools {
-        jdk 'jdk_11.0.14'
+        jdk 'JDK-11'
     }
 	stages {
 		stage('jdk 11') {
