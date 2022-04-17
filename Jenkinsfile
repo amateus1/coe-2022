@@ -4,8 +4,8 @@ pipeline {
         stage('Preparation') {
             steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-				tools {
-					jdk "JAVA_HOME"
+				environment {
+					jdk = "/usr/lib/jvm/java-1.11.0-openjdk-amd64"
 					env.JAVA_HOME = "${jdk}"
 					sh "java -version"
 					echo "jdk installation path is: ${jdk}"
