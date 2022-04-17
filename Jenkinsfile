@@ -30,13 +30,23 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean verify"
             }
         }
-		stage('SonarQube Analysis') {
-			steps {
-			def mvn = tool 'Default Maven'
-			withSonarQubeEnv() {
-				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
-			}
-		}
-	}
+//		stage('SonarQube Analysis') {
+//			steps {
+//			def mvn = tool 'Default Maven'
+//			withSonarQubeEnv() {
+//				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
+//			}
+//		}
+//	}
+		stage('Sonar') {
+			if (isUnix()) {
+				sh "'${mvnHome}/bin/mvn' sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=ef026f77b563ee37ea01bb630b4dc2701ce4a306"
+// 		    	sh "'${mvnHome}/bin/mvn' sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url= http://54.227.225.164:9000 -Dsonar.login= f68d0b7ae24f4963c23d2b65bd7ae17fc0f800e1" -X
+				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
+//      	} else {
+//         bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
+//      }
+   }
+
 }
 }
