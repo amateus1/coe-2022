@@ -86,7 +86,7 @@ pipeline {
 			sh "java -version"
 			sh "echo '**** STARTING SONAR ******'"
 			withSonarQubeEnv('SONAR') {
-				sh "echo 'coe+best2022' | sudo -S mvn clean package verify sonar:sonar -Dsonar.projectKey=coe-hygieia -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
+				sh "echo 'coe+best2022' | sudo -S mvn clean package sonar:sonar -Dsonar.projectKey=coe-hygieia -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
 			sh "echo '**** SONAR DONE ******'"	
 			}
 		}
