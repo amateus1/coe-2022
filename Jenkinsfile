@@ -97,6 +97,12 @@ pipeline {
 				sh "export JRE_HOME"
 				sh "export PATH"
 				sh "java -version"
+				sh "echo '**** STARTING VERIFY ******'"
+				sh "echo 'coe+best2022' | sudo -S mvn clean verify sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
+				sh "echo '**** ENDED VERIFY ******'"
+				sh "echo '**** STARTING CLEAN INSTALL ******'"
+				sh "echo 'coe+best2022' | sudo -S mvn clean install"
+				sh "echo '**** ENDED CLEAN INSTALL ******'"
 				sh "echo 'coe+best2022' | sudo -S mvn sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
 				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
 			} 
