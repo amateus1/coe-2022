@@ -84,8 +84,8 @@ pipeline {
 			steps {
 //			def mvn = tool 'Default Maven'
 			sh "echo '**** STARTING SONAR ******'"
-			withSonarQubeEnv(SONAR) {
-				sh "echo 'coe+best2022' | sudo -S mvn cln verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
+			withSonarQubeEnv('SONAR') {
+				sh "echo 'coe+best2022' | sudo -S mvn clean pakcage verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
 			sh "echo '**** SONAR DONE ******'"	
 			}
 		}
