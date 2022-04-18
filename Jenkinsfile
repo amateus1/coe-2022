@@ -56,6 +56,7 @@ pipeline {
 				sh "cd target"
 				sh "cd target"
 				sh "ls"
+				sh 'mvn -B -ntp -Dmaven.test.failure.ignore verify
 //				sh "ls /target/surefire-reports/"
                 hygieiaBuildPublishStep buildStatus: 'Success'
 //				hygieiaArtifactPublishStep artifactDirectory: './//target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: ''
