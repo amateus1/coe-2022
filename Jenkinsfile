@@ -58,7 +58,8 @@ pipeline {
 				sh "cd target"
 				sh "cd target"
 				sh "ls"
-				sh 'mvn -Dmaven.test.failure.ignore verify'
+				sh "echo '**** STARTING TEST ###2 ******'"
+				sh 'echo 'coe+best2022' | sudo -S mvn -Dmaven.test.failure.ignore verify'
 				sh "echo '**** COMPLETED TEST ###2 ******'"
 //				sh "ls /target/surefire-reports/"
                 hygieiaBuildPublishStep buildStatus: 'Success'
