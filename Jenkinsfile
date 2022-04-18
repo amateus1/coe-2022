@@ -1,12 +1,12 @@
 pipeline {
     agent any
 	tools {
-        jdk 'JDK-11'
+        jdk 'JDK-8'
     }
 	stages {
 		stage('jdk 11') {
 			steps {
-			withEnv(["JAVA_HOME=${tool 'JDK-11'}", "PATH=${tool 'JDK-11'}/bin:${env.PATH}"]) {
+			withEnv(["JAVA_HOME=${tool 'JDK-8'}", "PATH=${tool 'JDK-8'}/bin:${env.PATH}"]) {
 			sh 'java -version'
 			sh 'javac -version'
         }
@@ -18,7 +18,7 @@ pipeline {
                 git 'https://github.com/amateus1/simple-maven-project-with-tests.git'
 				//git 'https://github.com/jglick/simple-maven-project-with-tests.git'
 				//environment {
-					sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+					//sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
 					sh "export PATH=$JAVA_HOME/bin:$PATH"
 					sh "export JAVA_HOME"
 					sh "export JRE_HOME"
@@ -93,7 +93,7 @@ pipeline {
 //		stage('Sonar') {
 //			steps {
 //				sh "java -version"
-//				sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+//				//sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
 //				sh "export PATH=$JAVA_HOME/bin:$PATH"
 //				sh "export JAVA_HOME"
 //				sh "export JRE_HOME"
