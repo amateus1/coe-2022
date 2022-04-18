@@ -80,33 +80,33 @@ pipeline {
 				sh "java -version"				
             }
         }
-//		stage('SonarQube Analysis') {
-//			steps {
-//			def mvn = tool 'Default Maven'
-//			withSonarQubeEnv() {
-//				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
-//			}
-//		}
-//	}
-		stage('Sonar') {
+		stage('SonarQube Analysis') {
 			steps {
-				sh "java -version"
-				sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
-				sh "export PATH=$JAVA_HOME/bin:$PATH"
-				sh "export JAVA_HOME"
-				sh "export JRE_HOME"
-				sh "export PATH"
-				sh "java -version"
-				sh "echo '**** STARTING VERIFY ******'"
-				sh "echo 'coe+best2022' | sudo -S mvn clean install verify sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
-				sh "echo '**** ENDED VERIFY ******'"
-				sh "echo '**** STARTING CLEAN INSTALL ******'"
-				sh "echo 'coe+best2022' | sudo -S mvn clean install"
-				sh "echo '**** ENDED CLEAN INSTALL ******'"
-				sh "echo 'coe+best2022' | sudo -S mvn sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
-				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
-			} 
+			def mvn = tool 'Default Maven'
+			withSonarQubeEnv(sonar) {
+				sh "echo 'coe+best2022' | sudo -S mvn cln verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
+			}
 		}
+	}
+//		stage('Sonar') {
+//			steps {
+//				sh "java -version"
+//				sh "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+//				sh "export PATH=$JAVA_HOME/bin:$PATH"
+//				sh "export JAVA_HOME"
+//				sh "export JRE_HOME"
+//				sh "export PATH"
+//				sh "java -version"
+//				sh "echo '**** STARTING VERIFY ******'"
+//				sh "echo 'coe+best2022' | sudo -S mvn clean install verify sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
+//				sh "echo '**** ENDED VERIFY ******'"
+//				sh "echo '**** STARTING CLEAN INSTALL ******'"
+//				sh "echo 'coe+best2022' | sudo -S mvn clean install"
+//				sh "echo '**** ENDED CLEAN INSTALL ******'"
+//				sh "echo 'coe+best2022' | sudo -S mvn sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
+//				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
+//			} 
+//		}
 	}
 }
 
