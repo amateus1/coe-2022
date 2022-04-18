@@ -82,6 +82,7 @@ pipeline {
         }
   stage('SonarQube Analysis') {
 //    def mvn = tool 'Default Maven';
+		sh "echo '**** STARTING SONAR TEST 1******'"
     tools {
         jdk "JDK-11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
     }
@@ -89,7 +90,7 @@ pipeline {
         scannerHome = tool 'SONAR' // the name you have given the Sonar Scanner (Global Tool Configuration)
     }
     steps {
-		sh "echo '**** STARTING SONAR TEST ******'"
+		sh "echo '**** STARTING SONAR TEST 2******'"
         withSonarQubeEnv(installationName: 'SONAR') {
             sh "echo 'coe+best2022' | sudo -S mvn sonar:sonar -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
         }
