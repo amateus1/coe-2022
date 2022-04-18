@@ -53,7 +53,9 @@ pipeline {
                 archiveArtifacts 'target/*.jar'
 				sh "echo '**** COMPLETED TEST ******'"
 				sh "pwd"
+				sh "cd target"
 				sh "ls"
+				sh "ls /target/surefire-reports/"
 //                hygieiaBuildPublishStep buildStatus: 'Success'
 //				hygieiaArtifactPublishStep artifactDirectory: './//target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: ''
 //                hygieiaDeployPublishStep applicationName: 'Devops3', artifactDirectory: './target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: '', buildStatus: 'Success', environmentName: 'Dev'
