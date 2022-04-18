@@ -40,9 +40,11 @@ pipeline {
         }
         stage('Build') {
             steps {
+				sh "echo '**** STARTIN BUILD ******'"
 				sh "java -version"                
-				sh "mvn -Dmaven.test.failure.ignore=true clean package"
+				sh "echo 'coe+best2022' | sudo -S mvn -Dmaven.test.failure.ignore=true clean install package"
 				sh "java -version"
+				sh "echo '**** END BUILD ******'"
             }
         }
 		stage('Unit Test') {
