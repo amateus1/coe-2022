@@ -60,12 +60,13 @@ pipeline {
 				hygieiaDeployPublishStep applicationName: 'develop-pipeline', artifactDirectory: 'target', artifactGroup: 'com.example', artifactName: '*.war', artifactVersion: '', buildStatus: 'Success', environmentName: 'PROD'    
 				hygieiaCodeQualityPublishStep checkstyleFilePattern: '**/*/checkstyle-result.xml', findbugsFilePattern: '**/*/Findbugs.xml', jacocoFilePattern: '**/*/jacoco.xml', junitFilePattern: '**/*/TEST-.*-test.xml', pmdFilePattern: '**/*/PMD.xml'
  				sh "java -version"
+				sh "echo '**** COMPLETED TEST ******'"
             }
         }
 		stage('Integration Test') {
             steps {
                 sh "java -version"
-				sh "mvn -Dmaven.test.failure.ignore=true clean verify"
+				sh "echo 'coe+best2022' | sudo -S mvn -Dmaven.test.failure.ignore=true clean verify"
 				sh "java -version"				
             }
         }
@@ -86,7 +87,7 @@ pipeline {
 				sh "export JRE_HOME"
 				sh "export PATH"
 				sh "java -version"
-				sh "mvn sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
+				sh "echo 'coe+best2022' | sudo -S mvn sonar:sonar -Dsonar.projectKey=coe-hygieia   -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
 				hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
 			} 
 		}
