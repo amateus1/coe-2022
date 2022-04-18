@@ -80,17 +80,31 @@ pipeline {
 				sh "java -version"				
             }
         }
-		stage('SonarQube Analysis') {
-			steps {
+  stage('SonarQube Analysis') {
+//    def mvn = tool 'Default Maven';
+    tools {
+        jdk "JDK-11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
+    }
+	environment {
+        scannerHome = tool 'SONAR' // the name you have given the Sonar Scanner (Global Tool Configuration)
+    }
+    steps {
+		sh "echo '**** STARTING SONAR TEST ******'"
+        withSonarQubeEnv(installationName: 'SONAR') {
+            sh "echo 'coe+best2022' | sudo -S mvn sonar:sonar -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com "
+        }	
+	
+//		stage('SonarQube Analysis') {
+//			steps {
 //			def mvn = tool 'Default Maven'
-			sh "java -version"
-			sh "echo '**** STARTING SONAR ******'"
-			withSonarQubeEnv('SONAR') {
-				sh "echo 'coe+best2022' | sudo -S mvn install  sonar:sonar -Dsonar.projectKey=coe-hygieia -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
-			sh "echo '**** SONAR DONE ******'"	
-			}
-		}
-	}
+//			sh "java -version"
+//			sh "echo '**** STARTING SONAR ******'"
+//			withSonarQubeEnv('SONAR') {
+//				sh "echo 'coe+best2022' | sudo -S mvn install  sonar:sonar -Dsonar.projectKey=coe-hygieia -Dsonar.host.url=http://mep-sonar.eastus2.cloudapp.azure.com  -Dsonar.login=fe5b9d9f8a95064ec4a4547c850700dd78c1b038"
+//			sh "echo '**** SONAR DONE ******'"	
+//			}
+//		}
+//	}
 //		stage('Sonar') {
 //			steps {
 //				sh "java -version"
