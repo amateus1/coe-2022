@@ -83,8 +83,10 @@ pipeline {
 		stage('SonarQube Analysis') {
 			steps {
 //			def mvn = tool 'Default Maven'
-			withSonarQubeEnv(sonar) {
+			sh "echo '**** STARTING SONAR ******'"
+			withSonarQubeEnv(SONAR) {
 				sh "echo 'coe+best2022' | sudo -S mvn cln verify sonar:sonar -Dsonar.projectKey=coe-hygieia"
+			sh "echo '**** SONAR DONE ******'"	
 			}
 		}
 	}
