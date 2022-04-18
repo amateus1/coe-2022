@@ -48,8 +48,10 @@ pipeline {
 		stage('Unit Test') {
             steps {
 				sh "java -version"                
+				sh "echo '**** STARTIN TEST ******'
 				junit '**/target/surefire-reports/TEST-*.xml'
                 archiveArtifacts 'target/*.jar'
+				sh "echo '**** COMPLETED TEST ******'
 //                hygieiaBuildPublishStep buildStatus: 'Success'
 //				hygieiaArtifactPublishStep artifactDirectory: './//target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: ''
 //                hygieiaDeployPublishStep applicationName: 'Devops3', artifactDirectory: './target', artifactGroup: 'test', artifactName: '*.jar', artifactVersion: '', buildStatus: 'Success', environmentName: 'Dev'
