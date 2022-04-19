@@ -1,12 +1,12 @@
 pipeline {
     agent any
 	tools {
-        jdk 'JDK-8'
+        jdk 'JDK-11'
     }
 	stages {
 		stage('jdk 11') {
 			steps {
-			withEnv(["JAVA_HOME=${tool 'JDK-8'}", "PATH=${tool 'JDK-8'}/bin:${env.PATH}"]) {
+			withEnv(["JAVA_HOME=${tool 'JDK-11'}", "PATH=${tool 'JDK-11'}/bin:${env.PATH}"]) {
 			sh 'java -version'
 			sh 'javac -version'
         }
@@ -84,7 +84,7 @@ pipeline {
 //    def mvn = tool 'Default Maven';
 
     tools {
-        jdk "JDK-8" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
+        jdk "JDK-11" // the name you have given the JDK installation using the JDK manager (Global Tool Configuration)
     }
 	environment {
         scannerHome = tool 'SONAR' // the name you have given the Sonar Scanner (Global Tool Configuration)
